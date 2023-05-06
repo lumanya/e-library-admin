@@ -1,0 +1,105 @@
+.tooltip {
+    display: inline;
+    position: relative;
+    z-index: 999;
+    opacity: 1;
+}
+
+.tooltip-effect-1,
+.tooltip-effect-2,
+.tooltip-effect-3 {
+    opacity: 1;
+}
+
+/* Gap filler */
+.tooltip-content::after {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    pointer-events: none;
+    left: 45%;
+    border-left: 15px solid transparent;
+    border-bottom: 15px solid #382867;
+    -webkit-transform: rotate(90%);
+    transform: rotate(45deg);
+}
+
+.tooltip:hover::after {
+	pointer-events: auto;
+}
+
+/* Tooltip */
+
+.tooltip-content {
+	position: absolute;
+	z-index: 9999;
+	width: 300px;
+	left: 50%;
+	bottom: 100%;
+	font-size: 20px;
+	line-height: 1.4;
+	text-align: center;
+	font-weight: 400;
+	color: #fff;
+	background: transparent;
+	opacity: 0;
+	margin: 0 0 20px -150px;
+	cursor: default;
+	pointer-events: none;
+	font-family: 'Satisfy', cursive;
+	-webkit-font-smoothing: antialiased;
+	-webkit-transition: opacity 0.3s 0.3s;
+	transition: opacity 0.3s 0.3s;
+}
+
+.tooltip:hover .tooltip-content {
+	opacity: 1;
+	pointer-events: auto;
+	-webkit-transition-delay: 0s;
+	transition-delay: 0s;
+}
+
+.tooltip-content span {
+	display: block;
+}
+
+.tooltip-text {
+    border: 10px solid;
+    border-image-source: linear-gradient(87deg, #0060FB, #382867);
+    border-image-slice: 1;
+    border-top:0px;
+    border-left:0px;
+    border-right:0px;
+	overflow: hidden;
+	-webkit-transform: scale3d(0,1,1);
+	transform: scale3d(0,1,1);
+	-webkit-transition: -webkit-transform 0.3s 0.3s;
+	transition: transform 0.3s 0.3s;
+}
+
+.tooltip:hover .tooltip-text {
+	-webkit-transition-delay: 0s;
+	transition-delay: 0s;
+	-webkit-transform: scale3d(1,1,1);
+	transform: scale3d(1,1,1);
+}
+
+.tooltip-inner {
+    min-width: 300px;
+	background: linear-gradient(87deg, #0060FB, #382867);
+	padding: 20px;
+	-webkit-transform: translate3d(0,100%,0);
+	transform: translate3d(0,100%,0);
+	webkit-transition: -webkit-transform 0.3s;
+	transition: transform 0.3s;
+    border-bottom-right-radius: 0rem;
+    border-bottom-left-radius: 0rem;
+}
+
+.tooltip:hover .tooltip-inner {
+	-webkit-transition-delay: 0.3s;
+	transition-delay: 0.3s;
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
