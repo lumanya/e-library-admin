@@ -9,8 +9,8 @@
                 <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                    aria-expanded="false">
                     <div class="media align-items-center">
-                        <span class="avatar avatar-sm rounded-circle"> 
-                        <?php 
+                        <span class="avatar avatar-sm rounded-circle">
+                        <?php
                             $default = URL::asset(\Config::get('constant.USER.DEFAULT_IMAGE'));
                             $image = getSingleMedia(\Auth::user(),'profile_image',null) !== null ? getSingleMedia(\Auth::user(),'profile_image',null):$default ;
                         ?>

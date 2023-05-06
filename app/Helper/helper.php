@@ -82,11 +82,11 @@ function uploadImage($file, $path, $id, $field_name)
 }
 function uploadFile($file, $path,$id = '' , $field_name = '')
 {
- 
+
 
     if ($file != null) {
 
-  
+
         $paths = public_path().'/'.$path.'/';
         if (!file_exists($paths)) {
             File::makeDirectory($paths, $mode = 0777, true, true);
@@ -151,7 +151,7 @@ function sendOneSignalMessage($device_ids, $device_data) {
                 "book_id"    => isset($device_data['book_id']) ? $device_data['book_id'] : 'book_id',
                 "notification_type"    => isset($device_data['notification_type']) ? $device_data['notification_type'] : 'notification_type',
             );
-    
+
         $fields = array(
             'app_id' => env('ONESIGNAL_API_KEY'),
             'include_player_ids' => $device_ids,
@@ -160,14 +160,14 @@ function sendOneSignalMessage($device_ids, $device_data) {
             'headings' => $heading,
             'big_picture' => isset($device_data['image']) ? $device_data['image'] : 'Image',
         );
-    
+
         $header=[
             "title" => isset($device_data['title']) ? $device_data['title'] :  env('APP_NAME').' Title',
             "message" => isset($device_data['message']) ? $device_data['message'] :  env('APP_NAME').' Message',
         ];
-    
-    
-    
+
+
+
         $sendContent = json_encode($fields);
         \Log::info('Content :- '.$sendContent);
         oneSignalAPI($sendContent);
@@ -188,7 +188,7 @@ function oneSignalAPI($sendContent)
         curl_setopt($ch, CURLOPT_POST, TRUE);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $sendContent);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-        
+
         $response = curl_exec($ch);
         curl_close($ch);
 }
@@ -226,7 +226,7 @@ function getSingleMedia($model, $collection = 'image', $skip=true   )
 }
 function getBookFile($filetype){
     $file = asset('assets/sample_file/sample.pdf');
-    
+
     if( $filetype != null  ){
         switch($filetype){
             case 'video':
