@@ -10,9 +10,9 @@ use App\UserFavouriteBook;
 use App\Category;
 use App\StaticData;
 use App\TransactionDetail;
-use File;
-use Datatables;
-use DB;
+use Illuminate\Support\Facades\File;
+use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 
@@ -297,14 +297,14 @@ class BookController extends Controller
     public function trash($id, $type)
     {
 
-       
+
         $file = Book::find($id);
 
         if ($type == 'file_path') {
             $file_name = $file->file_path;
             $file_path = public_path('uploads/file-path/' . $file_name);
-            if (\File::exists($file_path)) {
-                \File::delete($file_path);
+            if (File::exists($file_path)) {
+                File::delete($file_path);
                 $file->file_path = null;
             }
         } else {
@@ -312,11 +312,11 @@ class BookController extends Controller
             $file_path2 = public_path('uploads/sample-file/' . $file_name1);
 
             //dd($file_path2);
-            if (\File::exists($file_path2)) {
-                \File::delete($file_path2);
+            if (File::exists($file_path2)) {
+                File::delete($file_path2);
                 $file->file_sample_path = null;
             }
-        }    
+        }
 
      //dd($file_path);
       $file->update();

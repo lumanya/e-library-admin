@@ -15,8 +15,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "lavary/laravel-menu": "^1.8",
+        "php-ffmpeg/php-ffmpeg": "^0.19.0",
         "spatie/laravel-medialibrary": "^9.12",
-
         "spatie/laravel-permission": "^4.0",
         "tightenco/ziggy": "^1.4",
         "yajra/laravel-datatables": "^1.5",

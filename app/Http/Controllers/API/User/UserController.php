@@ -6,7 +6,7 @@ use App\User;
 use App\Feedback;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\UserRequest;
@@ -17,7 +17,7 @@ public $successStatus = 200;
 
     public function login(){
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
-            $user = Auth::user();       
+            $user = Auth::user();
             if($user->device_id != request('device_id')){
                 $user_device = \App\User::where('device_id',request('device_id'))->first();
                 if($user_device != null){
@@ -45,7 +45,7 @@ public $successStatus = 200;
 
     public function register(UserRequest $request){
         $input = $request->all();
-                
+
         $password = $input['password'];
         $input['user_type'] = !empty($input['user_type']) ? $input['user_type'] : 'user';
         $input['password'] = Hash::make($password);
@@ -67,16 +67,16 @@ public $successStatus = 200;
     public function updateUserProfile(Request $request){
         $data = $request->all();
         $user = User::updateOrCreate(['id' => $data['id'] ], $data);
-            
+
         if(isset($request->profile_image) && $request->profile_image != null ) {
             $user->clearMediaCollection('profile_image');
             $user->addMediaFromRequest('profile_image')->toMediaCollection('profile_image');
         }
-        
+
         $message = trans('messages.update_form',['form' => 'User profile']);
-        $user_detail = User::where('id',optional($user)->id)->first(); 
-       
-        $user_detail['image'] = getSingleMedia($user_detail,'profile_image',null); 
+        $user_detail = User::where('id',optional($user)->id)->first();
+
+        $user_detail['image'] = getSingleMedia($user_detail,'profile_image',null);
         $response = [
             'data' => $user_detail,
             'message' => $message
@@ -85,7 +85,7 @@ public $successStatus = 200;
     }
 
     public function saveFeedBack(Request $request){
-		$validator = \Validator::make($request->all(), [
+		$validator = Validator::make($request->all(), [
             'name'  => 'required',
             'email' => 'required|email',
             'comment' => 'required',

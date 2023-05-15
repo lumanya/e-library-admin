@@ -6,7 +6,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
                 aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button> 
+        </button>
 
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="{{ route('home') }}">
@@ -69,7 +69,7 @@
                         <i class="ni ni-user-run"></i>
                         <span>Logout</span>
                     </a> -->
-                    <a class="dropdown-item" href="{{ route('logout') }}" 
+                    <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">
                         <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
@@ -115,12 +115,12 @@
             </form>
 <ul class="navbar-nav">
 
-          
-@php   
+
+@php
     $url = '';
 
     $MyNavBar = \Menu::make('MenuList', function ($menu) use($url){
-        
+
         //Admin Dashboard
         $menu->add('<span>'.__('messages.Home').'</span>', ['route' => 'home'])
             ->prepend('<i class="ni ni-tv-2 text-primary"></i>')
@@ -155,10 +155,14 @@
             ->prepend('<i class="fas fa-book text-primary"></i>')
             ->link->attr(['class' => '']);
 
+    $menu->add('<span>'.__('messages.audio').'</span>', ['route'  => 'audio.index'])
+            ->prepend('<i class="fas fa-music text-primary"></i>')
+            ->link->attr(['class' => '']);
+
      $menu->add('<span>'.__(''.'Sales').'</span>', ['route' => 'transactions.index'])
             ->prepend('<i class="fas fa-shopping-cart text-primary"></i>')
             ->link->attr(['class' => '']);
-          
+
      $menu->add('<span>'.__(''.'Users Feedback').'</span>', ['route' => 'users_feedback'])
             ->prepend('<i class="fas fa-comments text-primary"></i> ')
             ->link->attr(['class' => '']);
@@ -184,7 +188,7 @@
             ->prepend('<i class="fas fa-mobile-alt text-primary"></i>')
             ->link->attr(['class' => '']);
 
-        }); 
+        });
 
 @endphp
             @include(config('laravel-menu.views.bootstrap-items'), ['items' => $MyNavBar->roots()])

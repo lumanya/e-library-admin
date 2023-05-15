@@ -24,6 +24,12 @@ class Author extends Model implements HasMedia
     public function getBooks(){
         return $this->hasMany(Book::class, 'author_id');
     }
+
+    public function getAudios()
+    {
+        return $this->hasMany(Audio::class, 'author_id');
+    }
+
     public function getBookRating(){
         // return $this->hasManyThrough('App\BookRating', 'App\Book','book_id','book_id','author_id','author_id');
         return $this->hasManyThrough('App\BookRating', 'App\Book', 'author_id' , 'book_id','author_id','book_id');

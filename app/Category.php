@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use App\Audio;
 use App\Book;
 use App\SubCategory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,10 +17,10 @@ class Category extends Model
     public function getcategory(){
         return $this->belongsTo(Category::class, 'parent_id');
     }
-    
+
     protected function getCategoryName($category_id){
         return self::where('category_id',$category_id)->first();
-       
+
     }
 
     public function book(){
@@ -28,5 +29,9 @@ class Category extends Model
 
     public function subcategories(){
         return $this->hasMany('App\SubCategory', 'category_id');
+    }
+
+    public function audios() {
+        return $this->hasMany(Audio::class, 'category_id');
     }
 }

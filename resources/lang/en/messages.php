@@ -805,4 +805,7 @@
     'top_selling_book' => 'Top Selling Book',
     'recommended_book' => 'Recommended Book',
     'installer' => ':app Installer',
+
+    // Audio Management
+    'audio' => 'Audio',
 );
