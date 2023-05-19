@@ -82,6 +82,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'xss']], function ()
 
     // Audio routes
     Route::resource('audio', AudioController::class);
+    Route::get('audio-edit/{id?}', [AudioController::class, 'create'])->name('audio.update');
+    Route::get('audio-list/{type?}', [AudioController::class, 'audioList'])->name('audio.list');
+    Route::get('audio-view/{id}', [AudioController::class, 'view'])->name('audio.view');
+    Route::get('audio-destroy/{id}', [AudioController::class, 'destroy'])->name('audio.delete');
+    Route::post('audio-action', [AudioController::class, 'bookActions'])->name('audio.actions');
+    Route::get('admin-removefile/{id}/{type}', [AudioController::class, 'trash'])->name('audio.removefile');
 
     // Setting Controller
     Route::get('privacy-policy', [SettingController::class, 'privacyPolicy'])->name('privacy-policy');

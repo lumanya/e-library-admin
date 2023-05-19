@@ -757,6 +757,7 @@
     'mail_sent' => 'Mail has been sent successfully to subscriber user.',
     'not_updated' => ' :form status cannot updated.',
     'cancel_order' => 'Your order has been canceled successfully .',
+    'subcategory' => 'Subcategory',
     'Subcategory' => 'Subcategory',
     'author' => 'Author',
     'mobileslider'=> 'Mobile Slider',
@@ -808,4 +809,10 @@
 
     // Audio Management
     'audio' => 'Audio',
+    'cover_image' => 'Cover Image',
+    'top_selling_audio' => 'Top Selling Audio',
+    'recommended_audio' => 'Recommended Audio',
+    'new_audio_added' => 'New Audio Added',
+    'likes' => 'Likes',
+    'views' => 'Views',
 );

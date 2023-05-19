@@ -33,9 +33,12 @@ class Audio extends Model implements HasMedia
         'author_id',
         'like_count',
         'view_count',
+        'flag_top_sell',
+        'flag_recommend',
     ];
 
     protected $casts = [
+        'duration' => 'double',
         'category_id'  => 'integer',
         'subcategory_id' =>'integer',
         'author_id' => 'integer',

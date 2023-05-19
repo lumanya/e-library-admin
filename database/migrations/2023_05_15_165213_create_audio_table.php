@@ -25,7 +25,7 @@ class CreateAudioTable extends Migration
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->text('keywords')->nullable()->default(null);
-            $table->string('duration')->nullable();
+            $table->double('duration')->nullable()->default(0.00);
             $table->enum('type', ['MP3', 'MP4', 'WAV', 'OGG', 'AAC'])->default('MP3');
             $table->string('cover_image')->nullable()->default(null);
             $table->string('audio_file_path')->nullable()->default(null);
