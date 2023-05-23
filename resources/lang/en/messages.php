@@ -815,4 +815,6 @@
     'new_audio_added' => 'New Audio Added',
     'likes' => 'Likes',
     'views' => 'Views',
+    'viewed_by' => 'Viewed By',
+    'liked_by' => 'Liked By',
 );
