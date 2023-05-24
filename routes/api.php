@@ -26,11 +26,16 @@ Route::post('login',[API\User\UserController::class,'login']);
 Route::get('dashboard-detail',[API\Dashboard\DashboardController::class,'getDashboardDetail']);
 
 Route::get('book-list',[API\Book\BookController::class,'getBookList']);
-Route::get('author-book-list',[API\Book\BookController::class,'getBookAuthorWise']);
+Route::post('author-book-list',[API\Book\BookController::class,'getBookAuthorWise']);
 Route::post('book-detail',[API\Book\BookController::class,'getBookDetail']);
 Route::get('author-list',[API\Author\AuthorController::class,'getAuthorList']);
 
 Route::post('book-rating-list',[API\Book\BookController::class,'getBookRating']);
+
+// Audio routes
+Route::get('audio-list', [API\Audio\AudioController::class,'getAudioList']);
+Route::post('audio-author-list', [API\Audio\AudioController::class,'getAudioAuthorWise']);
+Route::post('audio-detail', [API\Audio\AudioController::class,'getAudioDetail']);
 
 // Category Subcategory and author
 Route::get('category-list',[API\Category\CategoryController::class,'getCategoryList']);
@@ -60,7 +65,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('save-transaction',[API\Transaction\TransactionController::class,'saveTransaction']);
     Route::get('get-transaction-history',[API\Transaction\TransactionController::class,'getTransactionDetail']);
     Route::get('user-purchase-book',[API\Transaction\TransactionController::class,'getUserPurchaseBookList']);
-    
+
     Route::get('generate-client-token',[API\Transaction\TransactionController::class,'generateClientToken']);
     Route::post('braintree-payment-process',[API\Transaction\TransactionController::class,'braintreePaymentProcess']);
 
@@ -76,4 +81,8 @@ Route::post('add-feedback',[API\User\UserController::class,'saveFeedback']);
 Route::post('forgot-password',[API\Password\PasswordController::class,'forgotPassword']);
 Route::post('verify-token',[API\Password\PasswordController::class,'VerificationOTPCheck']);
 Route::post('resend-otp',[API\Password\PasswordController::class,'ResendOTP']);
-Route::post('update-password',[API\Password\PasswordController::class,'updatePassword']); 
+Route::post('update-password',[API\Password\PasswordController::class,'updatePassword']);
+
+Route::get('test',function (){
+    return response()->json(['message'=>'Hello World']);
+});

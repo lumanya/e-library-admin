@@ -91,7 +91,7 @@
                                 {!!Form::label('file',trans('messages.upload'),array('class'=>'form-control-label','id'=>'upload'))!!}
                             </div>
                             <div class="custom-file col-md-4">
-                                {!! Form::file('auio_file_path',['id'=>"file_path",'class'=>"custom-file-input custom-file-input-sm detail file_path_remove", 'accept'=>'audio/*', 'required','onchange'=>"readURL(this,'audio_file_path','file_path1');"]) !!}
+                                {!! Form::file('audio_file_path',['id'=>"file_path",'class'=>"custom-file-input custom-file-input-sm detail file_path_remove", 'accept'=>'audio/*', 'required','onchange'=>"readURL(this,'audio_file_path','file_path1');"]) !!}
                                 {!!Form::label('File',isset($audiodata->audio_file_path) ? $audiodata->audio_file_path : null,array('class'=>'custom-file-label file_path_lable','id'=>'file_path1' ))!!}
                                 <div class="help-block with-errors"></div>
                             </div>

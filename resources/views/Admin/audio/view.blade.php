@@ -41,6 +41,10 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="d-inline">{{ $pageTitle }}</h3>
+                    <a href="{{ isset($extra['redirect_url']) ? $extra['redirect_url'] : route('audio.index') }}" id="back" class="btn btn-sm btn-primary float-right text-white inline ml-3">
+                        <i class="fa fa-angle-double-left"></i>
+                        {{ trans('messages.back') }}
+                    </a>
                 </div>
                 <div class="card-body">
                     <div class="row">

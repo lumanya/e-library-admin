@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Book;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Book;
 use App\BookRating;
 use App\UserWishlistBook;
@@ -46,7 +47,7 @@ class BookController extends Controller
                                 ],
             'data' => $item,
         ];
-        return response()->json($response);      
+        return response()->json($response);
     }
 
     public function getBookList(Request $request){
@@ -57,7 +58,7 @@ class BookController extends Controller
                                                         'subCategoryName',
                                                         // 'isWishlistBook'
                                                     ]);
-                                               
+
             if($request->has('category_id') && $request->category_id != null ){
                     $book_data->where('category_id',$request->category_id);
             }
@@ -94,7 +95,7 @@ class BookController extends Controller
                     $per_page = $book_data->count();
                 }
             }
-    
+
             $book_data  =  $book_data->paginate($per_page);
 
             $items        =   BookResource::collection($book_data);
@@ -130,16 +131,16 @@ class BookController extends Controller
                                                         'getPurchase'
                                                     ])
                                                     ->get();
-        
+
         $getBookDetail                    =   BookDetailResource::collection($book_data);
-        $getBookRating                   =   BookRatingResource::collection(BookRating::where('book_id', $request->book_id)->orderBy('rating_id','DESC')->limit(5)->get());                                            
-        
+        $getBookRating                   =   BookRatingResource::collection(BookRating::where('book_id', $request->book_id)->orderBy('rating_id','DESC')->limit(5)->get());
+
         $getAuthorBookList           =   BookResource::collection($book_data[0]->getAuthorBookList->where('book_id','!=',$request->book_id));
         $getCategoryBookList       =   BookResource::collection( $book_data[0]->getCategoryBookList->where('book_id','!=',$request->book_id));
         $getUserReview                   =  Null;
         $getAuthorDetail                 = AuthorResource::collection($book_data[0]->getAuthors);
-        
-        
+
+
         if($request->user_id != null){
             $getUserReview          =    BookRating::where('user_id',$request->user_id)->where('book_id',$request->book_id)->first();
         }
@@ -160,7 +161,7 @@ class BookController extends Controller
     public function addBookRating(Request $request){
         $data = $request->all();
 
-        $user  = \Auth::user();
+        $user  = Auth::user();
         $data['user_id'] = $user->id;
 
         $result = BookRating::Create($data);
@@ -172,7 +173,7 @@ class BookController extends Controller
     public function updateBookRating(Request $request){
         $data = $request->all();
 
-        $user  = \Auth::user();
+        $user  = Auth::user();
         $data['user_id'] = $user->id;
 
         $result = BookRating::where('rating_id',$request->rating_id)->Update($data);
@@ -188,7 +189,7 @@ class BookController extends Controller
     }
 
     public function deleteBookRating(Request $request){
-        $user = \Auth::user();
+        $user = Auth::user();
 
         $book_rating = BookRating::where('rating_id',$request->id)->where('user_id',$user->id)->delete();
 
@@ -198,7 +199,7 @@ class BookController extends Controller
     }
 
     public function getUserWishlistBook(){
-        $user = \Auth::user();
+        $user = Auth::user();
         $user_id = $user->id;
         $data = UserWishlistBook::where('user_id',$user_id)
                                 ->orderBy('wishlist_id', 'DESC')
@@ -212,7 +213,7 @@ class BookController extends Controller
     }
 
     public function addRemoveWishlistBook(Request $request){
-        $user   = \Auth::user();
+        $user   = Auth::user();
         $id     = isset($request->id) ? $request->id : '';
 
         $data   = $request->all();
