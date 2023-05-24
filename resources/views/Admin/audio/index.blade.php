@@ -40,7 +40,7 @@
                             <data-table class="table table-responsive" ajax="{{ route('audio.list',['type' => $type]) }}" :columns="[
                                 {data: 'DT_RowIndex','searchable':false, name: 'DT_RowIndex', title : '{{ trans('messages.srno') }}','orderable' : false },
                                 {data: 'cover_image'  ,'name' : 'cover_image' ,'title' : '{{ trans('messages.image') }}','type' : 'image'},
-                                {data: 'name'    ,'name' : 'name'  ,'title' : '{{ trans('messages.title',['field' => trans('messages.audio')]) }}'},
+                                {data: 'title', name : 'title','title' : '{{ trans('messages.title',['field' => trans('messages.audio')]) }}'},
                                 {data: 'author_name'    ,'name' : 'getAuthor.name'  ,'title' : '{{ trans('messages.author') }}'},
                                 {data: 'category_name' ,'name' : 'categoryName.name'  ,'title' : '{{ trans('messages.field_name',['field' => trans('messages.category')]) }}'},
                                 {data: 'flag_top_sell'    ,'name' : 'flag_top_sell'  ,'title' : '{{ trans('messages.top_selling_audio') }}'},
