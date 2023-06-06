@@ -12,6 +12,7 @@ use App\Author;
 use App\Category;
 use App\Setting;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\API\Audio\AudioResource;
 use App\Http\Resources\API\Book\BookResource;
 use App\Http\Resources\API\Book\UserWishlistBookResource;
 use App\Http\Resources\API\Book\TopSearchBookResource;
@@ -80,6 +81,8 @@ class DashboardController extends Controller
         $category_book            = CategoryResource::collection($category_book);
 
         $audio = Audio::orderBy('audio_id','desc')->paginate($per_page);
+
+        $audio = AudioResource::collection($audio);
 
         switch ($request->type) {
 
