@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Dashboard;
 
 use Illuminate\Http\Request;
 use App\Book;
+use App\Audio;
 use App\BookRating;
 use App\UserWishlistBook;
 use App\Mobile_slider;
@@ -51,7 +52,7 @@ class DashboardController extends Controller
         }
         $t_search_book  =  $t_search_book->paginate($per_page);
         $top_search_book        = BookResource::collection($t_search_book);
-        
+
         // $top_sell_book              = BookResource::collection(Book::orderBy('book_id','desc')->where('flag_top_sell',1)->paginate(12));
         $top_sell_book = Book::orderBy('book_id','desc')->where('flag_top_sell',1);
         if($request->per_page === 'all' ){
@@ -67,7 +68,7 @@ class DashboardController extends Controller
         }
         $recommended_book  =  $recommended_book->paginate($per_page);
         $recommended_book           = BookResource::collection($recommended_book);
-        
+
         $top_author                   = AuthorResource::collection(Author::take(10)->orderBy('author_id','desc')->get());
         // $category_book            = Category::get();
         // $category_book            = CategoryResource::collection(Category::orderBy('category_id','desc')->paginate(10));
@@ -77,7 +78,9 @@ class DashboardController extends Controller
         }
         $category_book  =  $category_book->paginate($per_page);
         $category_book            = CategoryResource::collection($category_book);
-        
+
+        $audio = Audio::orderBy('audio_id','desc')->paginate($per_page);
+
         switch ($request->type) {
 
             case 'popular_book':
@@ -85,7 +88,7 @@ class DashboardController extends Controller
             break;
             case 'category_book':
                     $items = $category_book;
-            break;        
+            break;
             case 'top_search_book':
                     $items = $top_search_book;
             break;
@@ -94,6 +97,10 @@ class DashboardController extends Controller
             break;
             case 'recommended_book':
                     $items = $recommended_book;
+            break;
+
+            case 'audio':
+                    $items = $audio;
             break;
 
             default:
@@ -105,18 +112,18 @@ class DashboardController extends Controller
                         }
                     }
                 }
-                
+
                 $setting_value  =Setting::whereIn('key',$getSetting)->get();
-                
+
                 $paytm = Config::get('mobile-config.PAYTM');
                 $paytmSetting=[];
                 foreach ($paytm as $sk => $ss){
                     $paytmSetting[]= 'PAYTM_'.$sk;
                 }
-                
+
                 $paytm_value = Setting::whereIn('key',$paytmSetting)->get();
                 $paytm_config = false;
-                if(count($paytm_value) > 0) {   
+                if(count($paytm_value) > 0) {
                     $paytm_config =  true;
                     foreach ($paytm_value as $key => $value) {
                         if (isset($value->value) && !empty($value->value)) {
@@ -127,7 +134,7 @@ class DashboardController extends Controller
                     }
                 }
                 if( getenv('BRAINTREE_ENV') &&  getenv('BRAINTREE_MERCHANT_ID')  && getenv('BRAINTREE_PUBLIC_KEY') && getenv('BRAINTREE_PRIVATE_KEY') && getenv('BRAINTREE_Merchant_Account_Id') ){
-                                       
+
                     $gateway = new Braintree\Gateway([
                         'environment' => env('BRAINTREE_ENV'),
                         'merchantId' => env('BRAINTREE_MERCHANT_ID'),
@@ -141,7 +148,7 @@ class DashboardController extends Controller
                     }  catch (Braintree\Exception\Authentication $e) {
                         $paypal_configuration = false;
                     } catch (Braintree\Exception\NotFound $e) {
-                        $paypal_configuration = false;    
+                        $paypal_configuration = false;
                     }
                 }else{
                     $paypal_configuration = false;
